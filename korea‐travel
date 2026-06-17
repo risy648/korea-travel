@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ソウル女子ガイド | 韓国女子が作るリアル旅行ガイド</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+/* ===== RESET & BASE ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;background:#FDF8F6;color:#1C1C2E;min-height:100vh;font-size:14px;line-height:1.6}
+
+/* ===== TOKENS ===== */
+:root{
+  --pink:#E8436A;
+  --pink-light:#FDE8ED;
+  --coral:#FF6B6B;
+  --peach:#FFB085;
+  --cream:#FDF8F6;
+  --warm-white:#FFF9F7;
+  --char:#1C1C2E;
+  --mid:#6B6B7E;
+  --muted:#A8A8B8;
+  --border:rgba(232,67,106,0.12);
+  --radius:14px;
+  --radius-lg:20px;
+  --shadow:0 4px 20px rgba(232,67,106,0.08);
+}
+
+/* ===== HEADER ===== */
+.site-header{padding:1.25rem 1.25rem 0;max-width:680px;margin:0 auto}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem}
+.site-logo{font-size:20px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,var(--pink),var(--peach));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.site-tagline{font-size:11px;color:var(--muted);letter-spacing:.04em}
+.header-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;background:var(--pink-light);color:var(--pink);padding:5px 12px;border-radius:999px;border:1px solid rgba(232,67,106,0.2)}
+
+/* ===== HERO ===== */
+.hero{max-width:680px;margin:1.25rem auto 0;padding:0 1.25rem}
+.hero-card{border-radius:var(--radius-lg);overflow:hidden;position:relative;border:none;height:220px;background:#0D0A1A}
+.hero-bg-svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,6,30,0.55) 0%,rgba(30,10,40,0.25) 50%,rgba(0,0,0,0.6) 100%)}
+.hero-content{position:relative;z-index:2;padding:1.4rem 1.25rem;height:100%;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-eyebrow{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,200,220,0.85);font-weight:700;margin-bottom:.4rem}
+.hero-title{font-size:22px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:.4rem;text-shadow:0 2px 12px rgba(0,0,0,0.4)}
+.hero-title span{color:#FFB3C6}
+.hero-sub{font-size:12px;color:rgba(255,255,255,0.72);line-height:1.65;max-width:320px}
+.hero-badge-row{display:flex;gap:6px;margin-bottom:.75rem}
+.hero-chip{font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,0.15);backdrop-filter:blur(6px);color:#fff;border:1px solid rgba(255,255,255,0.25)}
+
+/* ===== PROFILE ===== */
+.profile-section{max-width:680px;margin:1rem auto 0;padding:0 1.25rem}
+.profile-card{background:var(--warm-white);border-radius:var(--radius-lg);padding:1.1rem 1.25rem;border:1px solid var(--border);display:flex;gap:.9rem;align-items:flex-start}
+.profile-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--peach));flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 12px rgba(232,67,106,0.25)}
+.profile-body{}
+.profile-name{font-size:14px;font-weight:700;color:var(--char);margin-bottom:.2rem;display:flex;align-items:center;gap:6px}
+.profile-flag{font-size:13px}
+.profile-desc{font-size:12px;color:var(--mid);line-height:1.7}
+.profile-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:.5rem}
+.profile-tag{font-size:10px;padding:3px 9px;border-radius:999px;background:var(--pink-light);color:var(--pink);font-weight:500}
+
+/* ===== NAV ===== */
+.nav-section{max-width:680px;margin:1.5rem auto 0;padding:0 1.25rem}
+.nav-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:.75rem}
+.nav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.nav-card{background:var(--warm-white);border:1.5px solid var(--border);border-radius:var(--radius);padding:1rem .75rem;text-align:center;cursor:pointer;transition:all .2s;user-select:none}
+.nav-card:active{transform:scale(.97)}
+.nav-card.active{background:var(--pink);border-color:var(--pink);box-shadow:0 4px 16px rgba(232,67,106,0.3)}
+.nav-card.active .nav-icon,.nav-card.active .nav-label-text,.nav-card.active .nav-sub{color:#fff!important}
+.nav-icon{font-size:22px;margin-bottom:.35rem;display:block}
+.page-bg .nav-card .nav-icon{color:var(--pink)}
+.nav-label-text{font-size:12px;font-weight:700;color:var(--char);display:block}
+.nav-sub{font-size:10px;color:var(--muted);display:block;margin-top:2px}
+
+/* ===== MAIN CONTENT ===== */
+.main{max-width:680px;margin:1.5rem auto 0;padding:0 1.25rem 2rem}
+.section-block{display:none}
+.section-block.visible{display:block}
+.section-title{font-size:18px;font-weight:800;color:var(--char);margin-bottom:.35rem;display:flex;align-items:center;gap:8px}
+.section-title-icon{color:var(--pink)}
+.section-desc{font-size:13px;color:var(--mid);margin-bottom:1.25rem;line-height:1.7}
+
+/* ===== 肌タブ ===== */
+.skin-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:1rem}
+.skin-tabs::-webkit-scrollbar{display:none}
+.skin-tab{flex-shrink:0;font-size:12px;font-weight:600;padding:8px 16px;border-radius:999px;border:1.5px solid var(--border);background:var(--warm-white);color:var(--mid);cursor:pointer;white-space:nowrap;transition:all .2s}
+.skin-tab.active{background:var(--pink);border-color:var(--pink);color:#fff}
+
+/* ===== 施術カード ===== */
+.treat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.treat-card{background:var(--warm-white);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.treat-card:active{transform:scale(.98)}
+.treat-card:hover{border-color:var(--pink);box-shadow:var(--shadow)}
+.treat-card .tc-icon{font-size:20px;color:var(--pink);margin-bottom:.4rem}
+.treat-card h4{font-size:13px;font-weight:700;color:var(--char);margin-bottom:.3rem}
+.treat-card p{font-size:11px;color:var(--mid);line-height:1.5}
+.treat-card .tc-price{font-size:11px;color:var(--pink);font-weight:600;margin-top:.4rem}
+.treat-card .tc-hint{position:absolute;bottom:8px;right:10px;font-size:10px;color:var(--muted)}
+.badge-kr{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:linear-gradient(135deg,#D4537E,#a93860);color:#fff;margin-bottom:.3rem}
+.badge-r{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:linear-gradient(135deg,var(--pink),var(--coral));color:#fff;margin-bottom:.3rem}
+.badge-new{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:linear-gradient(135deg,#7B2FF7,#4A00E0);color:#fff;margin-bottom:.3rem;animation:pulse-badge 2s infinite}
+@keyframes pulse-badge{0%,100%{opacity:1}50%{opacity:.7}}
+
+/* ===== コスメ ===== */
+.cos-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cos-card{background:var(--warm-white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative}
+.cos-card-img{height:90px;display:flex;align-items:center;justify-content:center}
+.cos-card-body{padding:.75rem}
+.cos-brand{font-size:10px;color:var(--muted);font-weight:600;margin-bottom:.1rem}
+.cos-card-body h4{font-size:12px;font-weight:700;color:var(--char);margin-bottom:.3rem;line-height:1.4}
+.cos-card-body p{font-size:11px;color:var(--mid);line-height:1.5;margin-bottom:.35rem}
+.cos-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.35rem}
+.cos-tag{font-size:9px;padding:2px 7px;background:var(--pink-light);color:var(--pink);border-radius:999px;font-weight:500}
+.cos-price{font-size:11px;color:var(--pink);font-weight:600}
+.oy-badge{position:absolute;top:7px;left:7px;font-size:10px;font-weight:700;background:linear-gradient(135deg,#FFB800,#FF6B00);color:#fff;padding:2px 8px;border-radius:999px;z-index:2}
+.oy-note{background:var(--pink-light);border:1px solid rgba(232,67,106,0.2);border-radius:10px;padding:.6rem .9rem;font-size:11px;color:var(--pink);margin-bottom:.9rem;line-height:1.6;display:flex;align-items:flex-start;gap:6px}
+.cos-intro{font-size:13px;color:var(--mid);line-height:1.75;margin-bottom:1rem;padding:.75rem 1rem;background:var(--warm-white);border-radius:var(--radius);border:1px solid var(--border)}
+
+/* ===== クリニック ===== */
+.clinic-area-tabs{display:flex;gap:6px;margin-bottom:1rem}
+.area-tab{flex:1;font-size:12px;font-weight:600;padding:9px;border-radius:999px;border:1.5px solid var(--border);background:var(--warm-white);color:var(--mid);cursor:pointer;text-align:center;transition:all .2s}
+.area-tab.active{background:var(--pink);border-color:var(--pink);color:#fff}
+.clinic-filters{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:1rem}
+.clinic-filters::-webkit-scrollbar{display:none}
+.cf-tag{flex-shrink:0;font-size:11px;font-weight:600;padding:6px 13px;border-radius:999px;border:1.5px solid var(--border);background:var(--warm-white);color:var(--mid);cursor:pointer;white-space:nowrap}
+.cf-tag.active{background:var(--pink);border-color:var(--pink);color:#fff}
+.clinic-card{background:var(--warm-white);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;margin-bottom:8px;position:relative}
+.clinic-card.rec{border-color:var(--pink);border-width:2px;background:linear-gradient(135deg,#FFF5F7,var(--warm-white))}
+.rec-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;background:linear-gradient(135deg,var(--pink),var(--coral));color:#fff;margin-bottom:.5rem;box-shadow:0 2px 8px rgba(232,67,106,0.3)}
+.clinic-tier{font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;margin-bottom:.4rem;display:inline-block}
+.tier-cheap{background:#E8F5E9;color:#2E7D32}
+.tier-mid{background:#E3F2FD;color:#1565C0}
+.tier-prem{background:#F3E5F5;color:#6A1B9A}
+.clinic-card h4{font-size:14px;font-weight:700;color:var(--char);margin-bottom:.3rem}
+.clinic-card .c-loc{font-size:11px;color:var(--muted);margin-bottom:.3rem;display:flex;align-items:center;gap:4px}
+.clinic-card .c-desc{font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:.5rem}
+.clinic-card .c-meta{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.5rem}
+.c-pill{font-size:10px;padding:2px 8px;border-radius:999px;background:var(--pink-light);color:var(--pink)}
+.clinic-hp-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;text-decoration:none;padding:6px 14px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--pink),var(--coral))}
+
+/* ===== 食べ物・イベント・ショッピング ===== */
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.content-card{background:var(--warm-white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer}
+.content-card-img{height:100px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative}
+.content-card-body{padding:.75rem}
+.content-card-body h4{font-size:13px;font-weight:700;color:var(--char);margin-bottom:.3rem}
+.content-card-body p{font-size:11px;color:var(--mid);line-height:1.55}
+.content-card .c-area-tag{font-size:9px;padding:2px 7px;border-radius:999px;background:var(--pink-light);color:var(--pink);font-weight:600;display:inline-block;margin-top:.4rem}
+.section-divider{height:1px;background:var(--border);margin:1.25rem 0}
+.list-section-title{font-size:12px;font-weight:700;color:var(--mid);letter-spacing:.06em;margin-bottom:.75rem;display:flex;align-items:center;gap:6px}
+
+/* ===== 施術詳細オーバーレイ ===== */
+.detail-overlay{display:none;position:fixed;inset:0;z-index:200;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.detail-overlay.open{display:block}
+.page-bg .detail-backdrop{position:fixed;inset:0;background:linear-gradient(135deg,#ffe0ee 0%,#f9d6ff 50%,#ffecd2 100%)}
+.detail-backdrop::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.18'%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.detail-sheet{position:relative;z-index:1;margin:24px auto 40px;max-width:660px;padding:0 12px}
+.detail-sheet-inner{background:rgba(255,255,255,0.93);backdrop-filter:blur(20px);border-radius:24px;padding:1.5rem 1.25rem 2.5rem;box-shadow:0 8px 40px rgba(0,0,0,0.12);border:1px solid rgba(255,255,255,0.8)}
+.detail-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:1.5rem;padding:8px 16px;border-radius:999px;border:none;background:rgba(255,255,255,0.9);box-shadow:0 2px 8px rgba(0,0,0,0.1);color:var(--pink)}
+.detail-hero{border-radius:18px;padding:1.5rem;margin-bottom:1.5rem;background:linear-gradient(135deg,#ffe0ee 0%,#fff0f7 100%)}
+.detail-hero-icon{font-size:36px;margin-bottom:.75rem;color:var(--pink)}
+.detail-hero h1{font-size:22px;font-weight:800;margin-bottom:.5rem;line-height:1.3}
+.detail-hero-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.75rem}
+.detail-price-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:.75rem}
+.detail-price-box{flex:1;min-width:120px;background:rgba(255,255,255,0.85);border-radius:12px;padding:.65rem .9rem;border:1px solid rgba(255,255,255,0.9);box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+.detail-price-box .pb-label{font-size:10px;color:var(--muted);margin-bottom:2px}
+.detail-price-box .pb-val{font-size:15px;font-weight:700;color:var(--pink)}
+.detail-stars-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem}
+.detail-star-box{flex:1;min-width:120px;background:rgba(255,255,255,0.75);border-radius:14px;padding:.75rem 1rem;border:1px solid rgba(255,255,255,0.9);box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+.detail-star-box .sb-label{font-size:11px;font-weight:700;color:var(--mid);margin-bottom:.4rem}
+.detail-star-box .sb-stars{font-size:20px;letter-spacing:2px}
+.star-fill{color:#FFB800}.star-empty{color:#E0E0E0}
+.detail-section{margin-bottom:1.5rem}
+.detail-section-title{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;font-weight:700}
+.detail-desc-card{background:rgba(255,255,255,0.7);border-radius:14px;padding:1rem 1.1rem;font-size:14px;line-height:1.85;color:var(--char);border:1px solid rgba(255,255,255,0.9)}
+.detail-points{display:flex;flex-direction:column;gap:8px}
+.detail-point{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,0.7);border-radius:12px;padding:.7rem .9rem;border:1px solid rgba(255,255,255,0.9);font-size:13px;line-height:1.6}
+.detail-clinic-card{background:rgba(255,255,255,0.75);border-radius:14px;padding:1rem 1.1rem;margin-bottom:8px;border:1px solid rgba(255,255,255,0.9);display:flex;justify-content:space-between;align-items:flex-start;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.detail-clinic-info h4{font-size:14px;font-weight:700;margin-bottom:.25rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.detail-clinic-info p{font-size:12px;color:var(--mid);line-height:1.5;margin-bottom:.2rem}
+.detail-clinic-info .dc-loc{font-size:11px;color:var(--muted)}
+.detail-clinic-btn{font-size:12px;font-weight:600;text-decoration:none;padding:8px 16px;border-radius:999px;color:#fff;white-space:nowrap;flex-shrink:0;background:linear-gradient(135deg,var(--pink),var(--coral));box-shadow:0 2px 8px rgba(232,67,106,0.3)}
+.pop-flag{font-size:10px;padding:1px 6px;border-radius:999px}
+.flag-kr{background:#FFF0F5;color:var(--pink)}
+
+/* ===== 食べ物カード ===== */
+.food-card{border-radius:var(--radius);margin-bottom:8px;overflow:hidden;cursor:pointer;border:1px solid rgba(0,0,0,0.05)}
+.food-card-top{display:flex;align-items:flex-start;gap:.75rem;padding:.9rem 1rem}
+.food-emoji{font-size:28px;flex-shrink:0;margin-top:2px}
+.food-card-text{flex:1;min-width:0}
+.food-card-text h4{font-size:14px;font-weight:700;color:var(--char);margin-bottom:.2rem}
+.food-area{font-size:10px;color:var(--muted);display:block;margin-bottom:.3rem}
+.food-card-text p{font-size:12px;color:var(--mid);line-height:1.55}
+.food-arrow{flex-shrink:0;color:var(--muted);font-size:16px;transition:transform .25s;margin-top:2px}
+.food-shops{border-top:1px solid rgba(0,0,0,0.07);padding:.5rem .75rem .75rem}
+.food-shop-item{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;padding:.65rem .5rem;border-bottom:1px solid rgba(0,0,0,0.05)}
+.food-shop-item:last-child{border-bottom:none}
+.food-shop-info{flex:1;min-width:0}
+.food-shop-name{display:block;font-size:13px;font-weight:700;color:var(--char);margin-bottom:.15rem}
+.food-shop-area{display:block;font-size:10px;color:var(--muted);margin-bottom:.2rem}
+.food-shop-memo{display:block;font-size:11px;color:var(--mid);line-height:1.55}
+.food-shop-btn{flex-shrink:0;font-size:11px;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--pink),var(--coral));white-space:nowrap;align-self:center}
+.site-footer{max-width:680px;margin:0 auto;padding:1rem 1.25rem 2rem;text-align:center;border-top:1px solid var(--border);margin-top:2rem}
+.footer-inner{display:inline-flex;align-items:center;gap:.6rem;flex-wrap:wrap;justify-content:center}
+.footer-copy{font-size:11px;color:var(--muted)}
+.footer-sep{font-size:11px;color:var(--muted)}
+.footer-link{font-size:11px;color:var(--mid);text-decoration:underline;text-underline-offset:2px}
+
+/* ===== モバイル対応 ===== */
+@media(max-width:640px){
+  .nav-grid{grid-template-columns:repeat(4,1fr);gap:6px}
+  .nav-card{padding:.75rem .5rem}
+  .nav-label-text{font-size:11px}
+  .nav-sub{display:none}
+  .treat-grid,.cos-grid,.content-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .detail-sheet{margin:0;padding:0}
+  .detail-sheet-inner{border-radius:20px 20px 0 0;min-height:100vh;margin-top:48px}
+  .detail-clinic-card{flex-direction:column;gap:8px}
+  .detail-clinic-btn{align-self:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="page-bg" id="page-root">
+
+<!-- ヘッダー -->
+<header class="site-header">
+  <div class="header-top">
+    <div>
+      <div class="site-logo">🇰🇷 ソウル女子ガイド</div>
+      <div class="site-tagline">韓国女子が作るリアル旅行ガイド</div>
+    </div>
+    <div class="header-badge">🙋‍♀️ 現地民おすすめ</div>
+  </div>
+</header>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-card">
+    <!-- SVG背景：ソウル夜景＋女性後ろ姿＋ランタン -->
+    <svg class="hero-bg-svg" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- 夜空グラデーション -->
+      <defs>
+        <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0D0826"/>
+          <stop offset="60%" stop-color="#1A0E3A"/>
+          <stop offset="100%" stop-color="#2D1255"/>
+        </linearGradient>
+        <linearGradient id="glow1" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#E8436A" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#FF8FAB" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="glow2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#7B61FF" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#7B61FF" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="bldg" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1E1040"/>
+          <stop offset="100%" stop-color="#0D0826"/>
+        </linearGradient>
+        <linearGradient id="silhouette" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0A0618"/>
+          <stop offset="100%" stop-color="#150D2E"/>
+        </linearGradient>
+        <radialGradient id="moon" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFF5CC"/>
+          <stop offset="100%" stop-color="#FFE08A"/>
+        </radialGradient>
+      </defs>
+
+      <!-- 空 -->
+      <rect width="680" height="220" fill="url(#sky)"/>
+
+      <!-- 月 -->
+      <circle cx="580" cy="38" r="18" fill="url(#moon)" opacity="0.85"/>
+      <circle cx="588" cy="33" r="14" fill="#1A0E3A" opacity="0.35"/>
+
+      <!-- 星 -->
+      <circle cx="60" cy="20" r="1.2" fill="white" opacity="0.7"/>
+      <circle cx="130" cy="12" r="0.9" fill="white" opacity="0.6"/>
+      <circle cx="220" cy="25" r="1.1" fill="white" opacity="0.5"/>
+      <circle cx="310" cy="8" r="0.8" fill="white" opacity="0.65"/>
+      <circle cx="420" cy="18" r="1.0" fill="white" opacity="0.55"/>
+      <circle cx="500" cy="10" r="1.2" fill="white" opacity="0.7"/>
+      <circle cx="640" cy="22" r="0.9" fill="white" opacity="0.5"/>
+      <circle cx="90" cy="35" r="0.7" fill="white" opacity="0.4"/>
+      <circle cx="460" cy="30" r="0.8" fill="white" opacity="0.45"/>
+
+      <!-- ソウルタワー（Nソウルタワー風） -->
+      <rect x="330" y="55" width="6" height="55" fill="#1A1035" opacity="0.9"/>
+      <polygon points="333,30 326,55 340,55" fill="#1A1035" opacity="0.9"/>
+      <rect x="324" y="88" width="18" height="18" rx="2" fill="#150D2E" opacity="0.9"/>
+      <circle cx="333" cy="35" r="3" fill="#E8436A" opacity="0.9"/>
+      <!-- タワーの光の輪 -->
+      <ellipse cx="333" cy="106" rx="30" ry="4" fill="url(#glow1)" opacity="0.5"/>
+
+      <!-- ビル群（左） -->
+      <rect x="0" y="100" width="40" height="120" fill="url(#bldg)"/>
+      <rect x="42" y="85" width="55" height="135" fill="url(#bldg)"/>
+      <rect x="99" y="110" width="35" height="110" fill="url(#bldg)"/>
+      <rect x="136" y="95" width="48" height="125" fill="url(#bldg)"/>
+
+      <!-- ビルの窓（左） -->
+      <rect x="8" y="108" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.7"/>
+      <rect x="16" y="108" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.5"/>
+      <rect x="8" y="116" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.3"/>
+      <rect x="50" y="94" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.6"/>
+      <rect x="58" y="94" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.8"/>
+      <rect x="66" y="94" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.6"/>
+      <rect x="50" y="102" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.4"/>
+      <rect x="58" y="102" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.5"/>
+      <rect x="107" y="118" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.6"/>
+      <rect x="115" y="118" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.4"/>
+      <rect x="145" y="104" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.7"/>
+      <rect x="153" y="104" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.5"/>
+      <rect x="161" y="104" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.6"/>
+      <rect x="145" y="112" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.4"/>
+      <rect x="153" y="112" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.5"/>
+
+      <!-- ビル群（右） -->
+      <rect x="390" y="90" width="50" height="130" fill="url(#bldg)"/>
+      <rect x="442" y="80" width="60" height="140" fill="url(#bldg)"/>
+      <rect x="504" y="100" width="45" height="120" fill="url(#bldg)"/>
+      <rect x="551" y="75" width="55" height="145" fill="url(#bldg)"/>
+      <rect x="608" y="95" width="72" height="125" fill="url(#bldg)"/>
+
+      <!-- ビルの窓（右） -->
+      <rect x="398" y="99" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.7"/>
+      <rect x="406" y="99" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.5"/>
+      <rect x="414" y="99" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.6"/>
+      <rect x="398" y="107" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.4"/>
+      <rect x="450" y="88" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.8"/>
+      <rect x="458" y="88" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.6"/>
+      <rect x="466" y="88" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.5"/>
+      <rect x="450" y="96" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.4"/>
+      <rect x="458" y="96" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.7"/>
+      <rect x="512" y="108" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.6"/>
+      <rect x="520" y="108" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.4"/>
+      <rect x="560" y="84" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.7"/>
+      <rect x="568" y="84" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.6"/>
+      <rect x="576" y="84" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.5"/>
+      <rect x="560" y="92" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.4"/>
+      <rect x="618" y="103" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.7"/>
+      <rect x="626" y="103" width="5" height="4" rx="1" fill="#7B8FFF" opacity="0.5"/>
+      <rect x="634" y="103" width="5" height="4" rx="1" fill="#FFE08A" opacity="0.6"/>
+
+      <!-- 漢江の反射 -->
+      <rect x="0" y="175" width="680" height="45" fill="#0A0520" opacity="0.8"/>
+      <rect x="0" y="178" width="680" height="2" fill="rgba(123,97,255,0.15)"/>
+      <!-- 水面の光の反射 -->
+      <ellipse cx="100" cy="185" rx="25" ry="3" fill="#FFE08A" opacity="0.12"/>
+      <ellipse cx="200" cy="188" rx="18" ry="2" fill="#FFE08A" opacity="0.1"/>
+      <ellipse cx="333" cy="183" rx="20" ry="3" fill="#E8436A" opacity="0.15"/>
+      <ellipse cx="490" cy="186" rx="22" ry="2.5" fill="#7B8FFF" opacity="0.12"/>
+      <ellipse cx="600" cy="184" rx="16" ry="2" fill="#FFE08A" opacity="0.1"/>
+
+      <!-- ランタン -->
+      <g opacity="0.9">
+        <rect x="230" y="45" width="12" height="15" rx="3" fill="#E8436A" opacity="0.85"/>
+        <line x1="236" y1="45" x2="236" y2="40" stroke="#E8436A" stroke-width="1.5" opacity="0.7"/>
+        <ellipse cx="236" cy="60" rx="8" ry="3" fill="#FF6B6B" opacity="0.3"/>
+      </g>
+      <g opacity="0.75">
+        <rect x="265" y="35" width="10" height="13" rx="2.5" fill="#FFB800" opacity="0.85"/>
+        <line x1="270" y1="35" x2="270" y2="30" stroke="#FFB800" stroke-width="1.2" opacity="0.7"/>
+      </g>
+      <g opacity="0.65">
+        <rect x="248" y="55" width="9" height="12" rx="2" fill="#E8436A" opacity="0.7"/>
+        <line x1="252" y1="55" x2="252" y2="50" stroke="#E8436A" stroke-width="1" opacity="0.6"/>
+      </g>
+
+      <!-- 女性の後ろ姿シルエット -->
+      <g transform="translate(185, 95)">
+        <!-- 体 -->
+        <ellipse cx="45" cy="20" rx="11" ry="13" fill="url(#silhouette)"/>
+        <!-- 首 -->
+        <rect x="41" y="31" width="8" height="8" rx="3" fill="url(#silhouette)"/>
+        <!-- 頭 -->
+        <ellipse cx="45" cy="24" rx="13" ry="14" fill="url(#silhouette)"/>
+        <!-- ロングヘア -->
+        <path d="M32,28 Q25,50 28,75 Q30,85 35,88" stroke="url(#silhouette)" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M58,28 Q65,50 62,75 Q60,85 55,88" stroke="url(#silhouette)" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M33,35 Q28,58 32,80" stroke="#0A0618" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M57,35 Q62,58 58,80" stroke="#0A0618" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <!-- 肩・上半身 -->
+        <path d="M25,50 Q30,40 45,38 Q60,40 65,50 L68,95 L22,95 Z" fill="url(#silhouette)"/>
+        <!-- スカート -->
+        <path d="M22,90 Q20,110 18,125 L72,125 Q70,110 68,90 Z" fill="url(#silhouette)"/>
+        <!-- ふわっとしたスカートの裾 -->
+        <path d="M16,120 Q17,130 20,135 Q35,140 45,140 Q55,140 70,135 Q73,130 74,120" fill="url(#silhouette)" stroke="none"/>
+        <!-- 腕 -->
+        <path d="M25,55 Q15,75 18,95" stroke="url(#silhouette)" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <path d="M65,55 Q75,75 72,95" stroke="url(#silhouette)" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <!-- 足 -->
+        <rect x="33" y="135" width="10" height="22" rx="4" fill="url(#silhouette)"/>
+        <rect x="47" y="135" width="10" height="22" rx="4" fill="url(#silhouette)"/>
+      </g>
+
+      <!-- グロー光 -->
+      <ellipse cx="230" cy="175" rx="80" ry="15" fill="url(#glow1)" opacity="0.35"/>
+      <ellipse cx="500" cy="175" rx="60" ry="12" fill="url(#glow2)" opacity="0.25"/>
+    </svg>
+
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge-row">
+        <span class="hero-chip">🇰🇷 渡韓10回以上</span>
+        <span class="hero-chip">✈️ アラサーOL</span>
+      </div>
+      <p class="hero-eyebrow">Real Seoul Guide</p>
+      <h1 class="hero-title">旅行本に<span>載っていない</span><br>ソウルのリアル</h1>
+      <p class="hero-sub">肌管理・韓国料理・ショッピング。渡韓10回以上のアラサーOLが本気でおすすめする情報を厳選。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ナビ -->
+<div class="nav-section">
+  <p class="nav-label">カテゴリを選ぶ</p>
+  <div class="nav-grid">
+    <div class="nav-card active" id="nav-skin" onclick="showSection('skin',this)">
+      <span class="nav-icon"><i class="ti ti-sparkles"></i></span>
+      <span class="nav-label-text">肌</span>
+      <span class="nav-sub">皮膚科・コスメ</span>
+    </div>
+    <div class="nav-card" id="nav-food" onclick="showSection('food',this)">
+      <span class="nav-icon"><i class="ti ti-bowl"></i></span>
+      <span class="nav-label-text">食べ物</span>
+      <span class="nav-sub">グルメ・カフェ</span>
+    </div>
+    <div class="nav-card" id="nav-event" onclick="showSection('event',this)">
+      <span class="nav-icon"><i class="ti ti-calendar-event"></i></span>
+      <span class="nav-label-text">イベント</span>
+      <span class="nav-sub">観光・体験</span>
+    </div>
+    <div class="nav-card" id="nav-shopping" onclick="showSection('shopping',this)">
+      <span class="nav-icon"><i class="ti ti-shopping-bag"></i></span>
+      <span class="nav-label-text">ショッピング</span>
+      <span class="nav-sub">市場・モール</span>
+    </div>
+  </div>
+</div>
+
+<!-- メインコンテンツ -->
+<div class="main">
+
+  <!-- 肌セクション -->
+  <div id="sec-skin" class="section-block visible">
+    <h2 class="section-title"><i class="ti ti-sparkles section-title-icon"></i> 肌管理</h2>
+    <p class="section-desc">韓国の美容皮膚科は日本より安くて技術も高い。私が実際に通うクリニックと、オリーブヤングで買えるコスメをまとめました。</p>
+
+    <div class="skin-tabs">
+      <button class="skin-tab active" onclick="setSkinTab('treat',this)">🏥 施術を探す</button>
+      <button class="skin-tab" onclick="setSkinTab('clinic',this)">📍 クリニック</button>
+      <button class="skin-tab" onclick="setSkinTab('cosme',this)">💄 コスメ</button>
+    </div>
+
+    <!-- 施術 -->
+    <div id="skin-treat" class="skin-content visible">
+      <div class="skin-tabs" style="margin-bottom:1rem">
+        <button class="skin-tab active" onclick="setConcern('acne',this)">ニキビ・赤み</button>
+        <button class="skin-tab" onclick="setConcern('spot',this)">シミ・くすみ</button>
+        <button class="skin-tab" onclick="setConcern('pore',this)">毛穴・ニキビ跡</button>
+        <button class="skin-tab" onclick="setConcern('wrinkle',this)">シワ・たるみ</button>
+        <button class="skin-tab" onclick="setConcern('dry',this)">乾燥・ハリ</button>
+      </div>
+      <div id="concern-body"></div>
+    </div>
+
+    <!-- クリニック -->
+    <div id="skin-clinic" class="skin-content" style="display:none">
+      <div class="clinic-area-tabs">
+        <div class="area-tab active" id="at-md" onclick="setArea('md',this)">明洞エリア</div>
+        <div class="area-tab" id="at-gn" onclick="setArea('gn',this)">江南エリア</div>
+      </div>
+      <div class="clinic-filters">
+        <span class="cf-tag active" onclick="setTier('all',this)">すべて</span>
+        <span class="cf-tag" onclick="setTier('cheap',this)">💚 リーズナブル</span>
+        <span class="cf-tag" onclick="setTier('mid',this)">💙 バランス</span>
+        <span class="cf-tag" onclick="setTier('prem',this)">💜 上質</span>
+      </div>
+      <div id="clinic-results"></div>
+    </div>
+
+    <!-- コスメ -->
+    <div id="skin-cosme" class="skin-content" style="display:none">
+      <div class="skin-tabs" style="margin-bottom:1rem">
+        <button class="skin-tab active" onclick="setCos('vitc',this)">ビタミンC</button>
+        <button class="skin-tab" onclick="setCos('white',this)">美白</button>
+        <button class="skin-tab" onclick="setCos('moist',this)">保湿</button>
+        <button class="skin-tab" onclick="setCos('reti',this)">レチノール</button>
+        <button class="skin-tab" onclick="setCos('acne',this)">ニキビ</button>
+        <button class="skin-tab" onclick="setCos('uv',this)">日焼け止め</button>
+      </div>
+      <div id="cos-content"></div>
+      <p style="font-size:11px;color:var(--muted);margin-top:.5rem">※ 価格は参考目安。リニューアル等で変動します。</p>
+    </div>
+  </div>
+
+  <!-- 食べ物セクション -->
+  <div id="sec-food" class="section-block">
+    <h2 class="section-title"><i class="ti ti-bowl section-title-icon"></i> グルメ</h2>
+    <p class="section-desc">ソウルで絶対食べてほしいごはんとカフェ。タップするとおすすめのお店名と地図リンクが表示されます。</p>
+    <div class="list-section-title"><i class="ti ti-flame"></i> 絶対食べたいソウルグルメ</div>
+    <div id="food-grid"></div>
+    <div class="section-divider"></div>
+    <div class="list-section-title"><i class="ti ti-coffee"></i> 映えカフェ</div>
+    <div id="cafe-grid"></div>
+  </div>
+
+  <!-- イベントセクション -->
+  <div id="sec-event" class="section-block">
+    <h2 class="section-title"><i class="ti ti-calendar-event section-title-icon"></i> イベント・観光</h2>
+    <p class="section-desc">季節ごとのイベントや、韓国女子が実際に楽しむ体験スポット。観光地だけじゃないソウルを楽しんで。</p>
+
+    <div class="list-section-title"><i class="ti ti-star"></i> 体験・観光スポット</div>
+    <div class="content-grid" id="event-grid"></div>
+
+    <div class="section-divider"></div>
+    <div class="list-section-title"><i class="ti ti-calendar"></i> 季節のイベント</div>
+    <div class="content-grid" id="season-grid"></div>
+  </div>
+
+  <!-- ショッピングセクション -->
+  <div id="sec-shopping" class="section-block">
+    <h2 class="section-title"><i class="ti ti-shopping-bag section-title-icon"></i> ショッピング</h2>
+    <p class="section-desc">地元民が実際に買い物するエリアとスポット。免税店だけじゃない、韓国女子のリアルなお買い物案内。</p>
+
+    <div class="list-section-title"><i class="ti ti-map-pin"></i> エリア別ショッピング</div>
+    <div class="content-grid" id="shop-grid"></div>
+
+    <div class="section-divider"></div>
+    <div class="list-section-title"><i class="ti ti-tag"></i> 買ってよかったもの</div>
+    <div class="content-grid" id="buy-grid"></div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- フッター -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 ソウル女子ガイド</span>
+    <span class="footer-sep">|</span>
+    <a class="footer-link" href="disclaimer.html" target="_blank">免責事項</a>
+  </div>
+</footer>
+
+</div><!-- /page-root -->
+
+<!-- 施術詳細オーバーレイ -->
+<div class="detail-overlay" id="detail-overlay">
+  <div class="detail-backdrop" onclick="closeDetail()"></div>
+  <div class="detail-sheet">
+    <div class="detail-sheet-inner" id="detail-sheet-inner"></div>
+  </div>
+</div>
+
+<script>
+// ===== 施術データ =====
+var CONCERNS={
+acne:{intro:'<strong>ニキビ・赤み</strong>に効果的な施術。炎症を抑え皮脂を整えるアプローチが基本。',
+items:[
+{id:'peel',ic:'ti-flame',n:'ケミカルピーリング',badge:'最もおすすめ',d:'角質と皮脂詰まりを除去。月1回。',pk:'₩5,000〜10,000',
+cl:[{n:'リエンジャン',loc:'韓国・明洞/江南',why:'韓国式ピーリング＋鎮静ケアが安い',c:'kr',u:'https://jplienjang.com/'}]},
+{id:'led',ic:'ti-bolt',n:'LED光線（青色）',d:'アクネ菌殺菌＋鎮静。刺激ゼロ。',pk:'₩3,000〜6,000',
+cl:[{n:'リーダース皮膚科',loc:'韓国・明洞',why:'ニキビ肌管理コースにLEDを組込',c:'kr',u:'https://japan.leaders-md.com/'}]},
+{id:'dpen',ic:'ti-vaccine',n:'ダーマペン',badge:'',d:'成長因子を浸透。3〜5回。',pk:'₩10,000〜25,000',
+cl:[{n:'プムグローバル',loc:'韓国・明洞/江南',why:'薬剤オプションが豊富で安価',c:'kr',u:'https://link.inpock.co.kr/ppeum_jp'},{n:'ラミチェ皮膚科',loc:'韓国・蚕室',why:'院長が肌状態を見て薬剤を調整',c:'kr',u:'https://www.konest.com/contents/clinic_mise_detail.html?id=30798'}]},
+{id:'agnes',ic:'ti-bolt-filled',n:'アグネス（Agnes RF）',krOnly:true,badge:'🇰🇷 韓国限定',d:'皮脂腺を破壊し再発を根本予防。重症ニキビの最終手段。',pk:'₩30,000〜60,000',
+cl:[{n:'ラミチェ皮膚科',loc:'韓国・蚕室',why:'難治性ニキビ治療の実績が豊富',c:'kr',u:'https://www.konest.com/contents/clinic_mise_detail.html?id=30798'},{n:'Abijouクリニック',loc:'韓国・明洞',why:'ニキビ跡まで含めた総合プラン',c:'kr',u:'https://abijouclinic.com/jpn/'}]},
+{id:'genesis',ic:'ti-spray',n:'ジェネシス＋カーボン',krOnly:true,badge:'🇰🇷 韓国オリジナル',d:'レーザー＋カーボンで皮脂・毛穴・菌を同時に。',pk:'₩20,000〜35,000',
+cl:[{n:'リエンジャン',loc:'韓国・明洞/江南',why:'カーボンピーリングが看板メニュー',c:'kr',u:'https://jplienjang.com/'},{n:'YOU&I皮膚科',loc:'韓国・明洞/江南',why:'肌管理コースに組み込みやすい',c:'kr',u:'https://ameblo.jp/skinuni114/'}]}
+]},
+spot:{intro:'<strong>シミ・くすみ</strong>。濃いシミはレーザー、肝斑はトーニング。',
+items:[
+{id:'photo',ic:'ti-wave-sine',n:'フォトフェイシャル',badge:'最もおすすめ',d:'シミ・赤み・くすみに同時対応。',pk:'₩8,000〜15,000',
+cl:[{n:'リエンジャン',loc:'韓国・明洞/江南',why:'IPL系がパッケージで安い',c:'kr',u:'https://jplienjang.com/'}]},
+{id:'pico',ic:'ti-target',n:'ピコレーザー',d:'濃いシミをピンポイント除去。',pk:'₩5,000〜15,000',
+cl:[{n:'ラミチェ皮膚科',loc:'韓国・蚕室',why:'多数のレーザー機器から最適選択',c:'kr',u:'https://www.konest.com/contents/clinic_mise_detail.html?id=30798'}]},
+{id:'toning',ic:'ti-sparkles',n:'レーザートーニング',d:'肝斑・くすみに。×10回。',pk:'₩5,000〜12,000',
+cl:[{n:'明洞MUSEクリニック',loc:'韓国・明洞',why:'トーニング＋肌管理が人気',c:'kr',u:'https://ameblo.jp/musemdjp/'}]},
+{id:'gluta',ic:'ti-droplet-filled',n:'白玉（グルタチオン）点滴',krOnly:true,badge:'🇰🇷 韓国の定番',d:'抗酸化成分を全身に。美白注射として人気。',pk:'₩8,000〜20,000',
+cl:[{n:'プムグローバル',loc:'韓国・明洞/江南',why:'白玉点滴の価格が手頃',c:'kr',u:'https://link.inpock.co.kr/ppeum_jp'}]},
+{id:'bright',ic:'ti-bulb',n:'ブライトニング光治療',krOnly:true,badge:'🇰🇷 韓国限定',d:'韓国独自IPL機器でトーンを底上げ。',pk:'₩8,000〜18,000',
+cl:[{n:'YOU&I皮膚科',loc:'韓国・明洞/江南',why:'肌管理とセットの定番コース',c:'kr',u:'https://ameblo.jp/skinuni114/'},{n:'Seye Clinic',loc:'韓国・江南',why:'トーンアップ施術が得意',c:'kr',u:'https://seyeclinic.com/ja'}]}
+]},
+pore:{intro:'<strong>毛穴・ニキビ跡</strong>。クレーター跡には真皮再生施術が必要。',
+items:[
+{id:'dpen4',ic:'ti-vaccine',n:'ダーマペン4',badge:'最もおすすめ',d:'真皮再生を促進。3〜5回。',pk:'₩10,000〜25,000',
+cl:[{n:'ラミチェ皮膚科',loc:'韓国・蚕室',why:'ニキビ跡の総合治療が得意',c:'kr',u:'https://www.konest.com/contents/clinic_mise_detail.html?id=30798'}]},
+{id:'poten',ic:'ti-circle-dashed',n:'ポテンツァ',d:'RF＋ニードルで同時改善。',pk:'₩40,000〜80,000',
+cl:[{n:'プムグローバル',loc:'韓国・明洞/江南',why:'ポテンツァが破格の価格',c:'kr',u:'https://link.inpock.co.kr/ppeum_jp'},{n:'シャインビーム',loc:'韓国・江南',why:'ポテンツァの安さで話題',c:'kr',u:'https://gangnam.shinebeam.co.kr/ja'}]},
+{id:'hydra',ic:'ti-droplets',n:'ハイドラフェイシャル',d:'皮脂詰まりを即日除去。',pk:'₩7,000〜15,000',
+cl:[{n:'YOU&I皮膚科',loc:'韓国・明洞/江南',why:'肌管理コースの定番',c:'kr',u:'https://ameblo.jp/skinuni114/'}]},
+{id:'skinbo',ic:'ti-needle',n:'スキンボトックス',krOnly:true,badge:'🇰🇷 韓国発',d:'極微量ボトックスを真皮に。毛穴・テカリを抑える。',pk:'₩30,000〜60,000',
+cl:[{n:'リエンジャン',loc:'韓国・明洞/江南',why:'スキンボトックスが人気メニュー',c:'kr',u:'https://jplienjang.com/'}]},
+{id:'sylfirm',ic:'ti-grain',n:'シルファーム X',krOnly:true,badge:'🇰🇷 韓国限定',d:'パルスRFニードル。毛穴・跡・赤みに。',pk:'₩35,000〜70,000',
+cl:[{n:'チョンダムオラクル皮膚科',loc:'韓国・清潭洞',why:'最新機器をいち早く導入',c:'kr',u:'https://www.konest.com/contents/clinic_mise_detail.html?id=7140'}]}
+]},
+wrinkle:{intro:'<strong>シワ・たるみ</strong>。再生系は韓国が世界最先端。2025年は次世代リフティングが話題。',
+items:[
+{id:'hifu',ic:'ti-wave-square',n:'HIFU（ソフウェーブ）',badge:'最もおすすめ',d:'SMASに引き締め。最新型は痛みが大幅軽減。',pk:'₩30,000〜80,000',
+cl:[{n:'チョンダムオラクル皮膚科',loc:'韓国・清潭洞',why:'テンサーマ等の上位機種が充実',c:'kr',u:'https://www.konest.com/contents/clinic_mise_detail.html?id=7140'},{n:'リーダース皮膚科',loc:'韓国・明洞',why:'ウルセラ症例数が豊富',c:'kr',u:'https://japan.leaders-md.com/'}]},
+{id:'botox',ic:'ti-needle',n:'ボトックス注射',d:'表情ジワを瞬時改善。4〜6ヶ月持続。',pk:'₩10,000〜25,000',
+cl:[{n:'toxnfill 明洞店',loc:'韓国・明洞',why:'ボトックス専門の低価格チェーン',c:'kr',u:'https://jp.toxnfill35.com/'}]},
+{id:'filler',ic:'ti-droplet-half',n:'ヒアルロン酸フィラー',d:'深いシワにボリューム補充。1年持続。',pk:'₩30,000〜60,000',
+cl:[{n:'リエンジャン',loc:'韓国・明洞/江南',why:'フィラーの種類が豊富で安い',c:'kr',u:'https://jplienjang.com/'}]},
+{id:'exo',ic:'ti-cell',n:'エクソソーム療法',krOnly:true,badge:'🇰🇷 韓国最先端',d:'幹細胞由来の小胞で再生・シワ・たるみに。',pk:'₩60,000〜150,000',
+cl:[{n:'チョンダムオラクル皮膚科',loc:'韓国・清潭洞',why:'再生医療メニューが先進的',c:'kr',u:'https://www.konest.com/contents/clinic_mise_detail.html?id=7140'}]},
+{id:'rituo',ic:'ti-stars',n:'リトゥオ（Reto）',krOnly:true,badge:'🇰🇷 2024最新',d:'PCL+HA複合体でボリューム回復＋リフト同時。',pk:'₩50,000〜120,000',
+cl:[{n:'Seye Clinic',loc:'韓国・江南',why:'リトゥオの導入実績が豊富',c:'kr',u:'https://seyeclinic.com/ja'}]},
+{id:'titanium',ic:'ti-lightning-bolt',n:'チタニウムリフト',krOnly:true,badge:'🇰🇷 2025注目',d:'850nm超音波でSMAS引き上げ。痛みが少ない。',pk:'₩40,000〜90,000',
+cl:[{n:'リーダース皮膚科',loc:'韓国・明洞',why:'チタニウムリフト導入院',c:'kr',u:'https://japan.leaders-md.com/'}]}
+]},
+dry:{intro:'<strong>乾燥・ハリ不足</strong>。内側から潤す注入系がメイン。韓国は再生系メニューが世界最先端。',
+items:[
+{id:'aqua',ic:'ti-wave-square',n:'水光注射',badge:'即効性◎',d:'真皮に直接注入。翌日ツヤ実感。',pk:'₩15,000〜30,000',
+cl:[{n:'YOU&I皮膚科',loc:'韓国・明洞/江南',why:'水光注射が看板メニュー',c:'kr',u:'https://ameblo.jp/skinuni114/'}]},
+{id:'reju',ic:'ti-recycle',n:'リジュラン I・HB',krOnly:true,badge:'🇰🇷 韓国発',d:'サーモンPDRN配合。肌再生・乾燥に。',pk:'₩25,000〜45,000',
+cl:[{n:'リエンジャン',loc:'韓国・明洞/江南',why:'リジュランの取扱量が多い',c:'kr',u:'https://jplienjang.com/'},{n:'プムグローバル',loc:'韓国・明洞/江南',why:'リジュランが手頃な価格',c:'kr',u:'https://link.inpock.co.kr/ppeum_jp'}]},
+{id:'bambi',ic:'ti-mood-happy',n:'子鹿注射（バンビショット）',krOnly:true,badge:'🇰🇷 韓国トレンド',d:'アミノ酸＋ビタミン注射。血色感のある美肌に。',pk:'₩15,000〜30,000',
+cl:[{n:'YOU&I皮膚科',loc:'韓国・明洞/江南',why:'美肌注射メニューが豊富',c:'kr',u:'https://ameblo.jp/skinuni114/'}]},
+{id:'exoskin',ic:'ti-dna',n:'エクソソームスキンブースター',krOnly:true,badge:'🇰🇷 2025最新',d:'幹細胞由来エクソソームを真皮注入。リジュランの進化版。',pk:'₩50,000〜120,000',
+cl:[{n:'Seye Clinic',loc:'韓国・江南',why:'最新再生系スキンブースターを先行導入',c:'kr',u:'https://seyeclinic.com/ja'},{n:'チョンダムオラクル皮膚科',loc:'韓国・清潭洞',why:'再生医療の先進クリニック',c:'kr',u:'https://www.konest.com/contents/clinic_mise_detail.html?id=7140'}]}
+]}
+};
+
+// ===== クリニックデータ =====
+var TIERLBL={cheap:['tier-cheap','💚 リーズナブル'],mid:['tier-mid','💙 バランス'],prem:['tier-prem','💜 上質']};
+var CLINICS={
+md:[
+{n:'プムグローバル 明洞店',t:'cheap',loc:'明洞駅8番出口徒歩1分',d:'破格の価格で初心者の入門に最適。',jp:'日本語通訳常駐',tags:['ポテンツァ'],rec:false,u:'https://link.inpock.co.kr/ppeum_jp',ut:'公式（日本語）'},
+{n:'リエンジャン 明洞店',t:'cheap',loc:'明洞',d:'20年運営アジア12支店のメガクリニック。',jp:'日本語通訳常駐',tags:['免税'],rec:false,u:'https://jplienjang.com/',ut:'公式（日本語）'},
+{n:'toxnfill 明洞店',t:'cheap',loc:'乙支路入口駅6番出口・アップルストア8F',d:'若者に人気の低価格チェーン。34支店展開。',jp:'日本語メニュー',tags:['ボトックス'],rec:false,u:'https://jp.toxnfill35.com/',ut:'公式サイト'},
+{n:'YOU&I皮膚科 明洞店',t:'mid',loc:'明洞駅4番出口前',d:'バランスが良く日本人リピーター多数。',jp:'日本語スタッフ常駐',tags:['水光肌'],rec:true,u:'https://ameblo.jp/skinuni114/',ut:'公式ブログ'},
+{n:'明洞MUSEクリニック',t:'mid',loc:'明洞駅5番出口徒歩3分',d:'明洞の老舗人気院。日本人限定プロモーション実施中。',jp:'日本語スタッフ常駐',tags:['トーニング'],rec:false,u:'https://ameblo.jp/musemdjp/',ut:'公式ブログ'},
+{n:'リーダース皮膚科 明洞',t:'mid',loc:'会賢駅1番出口直結',d:'ソウル大出身専門医ぞろいの実力派。',jp:'日本語担当常駐',tags:['ニキビ'],rec:false,u:'https://japan.leaders-md.com/',ut:'公式（日本語）'},
+{n:'Abijouクリニック 明洞',t:'prem',loc:'乙支路入口駅6番出口',d:'芸能人来院多数。上品で丁寧な施術。',jp:'日本人スタッフ',tags:['ダブロ'],rec:false,u:'https://abijouclinic.com/jpn/',ut:'公式（日本語）'},
+{n:'WIZ&美',t:'prem',loc:'乙支路入口駅6番出口徒歩3分',d:'時間をかけたカウンセリングが好評。',jp:'日本語対応',tags:['個室'],rec:false,u:'https://www.konest.com/contents/clinic_mise_detail.html?id=5384',ut:'コネスト詳細'}
+],
+gn:[
+{n:'リエンジャン 江南本店',t:'cheap',loc:'江南大路沿いタワー内',d:'アジア最大級ネットワークの本店。',jp:'日本語通訳常駐',tags:['免税'],rec:false,u:'https://jplienjang.com/',ut:'公式（日本語）'},
+{n:'プムグローバル 江南店',t:'cheap',loc:'江南',d:'2023年オープンの外国人向け店舗。',jp:'日本語コーディネーター',tags:['ポテンツァ'],rec:false,u:'https://link.inpock.co.kr/ppeum_jp',ut:'公式（日本語）'},
+{n:'シャインビーム 江南店',t:'cheap',loc:'江南駅11番出口徒歩2分',d:'ポテンツァの安さで話題。日本語サイト完備。',jp:'日本語スタッフ在籍',tags:['ポテンツァ'],rec:false,u:'https://gangnam.shinebeam.co.kr/ja',ut:'公式（日本語）'},
+{n:'YOU&I皮膚科 江南店',t:'mid',loc:'江南駅エリア',d:'バランスが良く幅広く支持。',jp:'日本語スタッフ常駐',tags:['水光肌'],rec:true,u:'https://ameblo.jp/skinuni114/',ut:'公式ブログ'},
+{n:'ラミチェ皮膚科',t:'mid',loc:'蚕室・江南駅から15分',d:'51種以上のレーザー設備の本格派。',jp:'日本語通訳常駐',tags:['レーザー'],rec:false,u:'https://www.konest.com/contents/clinic_mise_detail.html?id=30798',ut:'予約ページ'},
+{n:'Seye Clinic',t:'prem',loc:'新ノニョン駅7番出口徒歩1分',d:'江南最大級規模。芸能人御用達の洗練空間。',jp:'日本語通訳完備',tags:['免税'],rec:false,u:'https://seyeclinic.com/ja',ut:'公式（日本語）'},
+{n:'チョンダムオラクル皮膚科',t:'prem',loc:'清潭洞',d:'国内外100院超のオラクル旗艦院。',jp:'日本語通訳',tags:['テンサーマ'],rec:false,u:'https://www.konest.com/contents/clinic_mise_detail.html?id=7140',ut:'予約ページ'},
+{n:'LIENJANG BLACK GANGNAM',t:'prem',loc:'江南',d:'リエンジャンのプレミアム院。',jp:'日本語対応',tags:['個室'],rec:false,u:'https://jplienjang.com/',ut:'公式（日本語）'}
+]};
+
+// ===== コスメデータ =====
+var WON_TO_YEN=0.11;
+function addYenConv(p){return p.replace(/<b>(₩[\d,〜]+)<\/b>/g,function(m,w){var nums=w.replace(/₩|,/g,'').split('〜');var conv=nums.map(function(n){return n?'¥'+Math.round(parseInt(n)*WON_TO_YEN/100)*100:'';}).filter(Boolean).join('〜');return '<b>'+w+'</b><span class="yen-conv">（'+conv+'）</span>';});}
+function bottleSVG(c1,c2,lbl){return '<svg width="54" height="70" viewBox="0 0 54 70"><defs><linearGradient id="bg'+lbl+'" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="'+c1+'"/><stop offset="100%" stop-color="'+c2+'"/></linearGradient></defs><rect x="14" y="2" width="26" height="4" rx="2" fill="'+c2+'"/><rect x="10" y="6" width="34" height="58" rx="8" fill="url(#bg'+lbl+')"/><rect x="14" y="30" width="26" height="16" rx="4" fill="rgba(255,255,255,0.35)"/><text x="27" y="42" text-anchor="middle" font-size="7" font-weight="bold" fill="rgba(255,255,255,0.9)">'+lbl+'</text></svg>';}
+var COS={
+vitc:{intro:'<strong>ビタミンC</strong>は抗酸化作用でシミ・くすみ予防、コラーゲン生成、毛穴引き締めなど多機能。',c1:'#FFE38A',c2:'#FFB84D',label:'Vit C',
+kr:[{b:'goodal',n:'青みかんビタC セラム',d:'済州島みかん70%＋VitC。オリヤン定番。',tags:['OYランキング常連'],oy:'🏆',p:'<b>₩25,000</b>'},{b:'COSRX',n:'ザ ビタミンC23セラム',d:'VC23%超高濃度。くすみ・シミに即効性。',tags:['VC23%'],p:'<b>₩27,000</b>'},{b:'Anua',n:'ビタミン10 PORESTRIXセラム',d:'VC10%＋毛穴引き締め。2025年話題作。',tags:['毛穴◎','2025新'],p:'<b>₩24,000</b>'},{b:'TIAM',n:'マイシートセラム VC10',d:'VC10%＋ナイアシンアミド。初心者◎',tags:['初心者'],p:'<b>₩22,000</b>'}]},
+white:{intro:'<strong>美白・シミ対策</strong>はメラニン生成を抑える成分が鍵。トラネキサム酸・アルブチン・ナイアシンアミドなど。',c1:'#FAEAEE',c2:'#E8AFBC',label:'White',
+kr:[{b:'Beauty of Joseon',n:'グロウセラム プロポリス＋ナイアシンアミド',d:'プロポリス60%×ナイアシンアミド2%。世界的ロングセラー。',tags:['OYランキング常連'],oy:'🏆',p:'<b>₩17,000</b>'},{b:'ISOI',n:'ブルガリアンローズ ブレミッシュセラム',d:'3年連続オリヤンアワードベストエッセンス1位。',tags:['3年連続1位'],oy:'🥇3年連続',p:'<b>₩32,000</b>'},{b:'Round Lab',n:'ドカブハ スポットセラム',d:'独島深海水ミネラル×ナイアシンアミド5%。',tags:['ミネラル'],p:'<b>₩24,000</b>'},{b:'MEDICUBE',n:'PDRN ピンクワン',d:'PDRN×トラネキサム酸。肌再生しながらくすみ改善。',tags:['PDRN'],p:'<b>₩32,000</b>'}]},
+moist:{intro:'<strong>保湿・セラミド</strong>は美肌の土台。バリア機能を補うことで乾燥・敏感肌が改善しやすい「下地」。',c1:'#D6EAFB',c2:'#8FBFE0',label:'Moist',
+kr:[{b:'TORRIDEN',n:'ダイブイン 低分子HAセラム',d:'2025年オリヤンアワード セラム部門1位。',tags:['2025アワード1位'],oy:'🥇2025セラム1位',p:'<b>₩19,000</b>'},{b:'AESTURA',n:'アトバリア365 クリーム',d:'2025年オリヤンアワード クリーム部門1位。',tags:['2025アワード1位'],oy:'🥇2025クリーム1位',p:'<b>₩30,000</b>'},{b:'Round Lab',n:'独島トナー',d:'2025年オリヤンアワード 化粧水部門1位。',tags:['2025アワード1位'],oy:'🥇2025化粧水1位',p:'<b>₩15,000</b>'},{b:'ILLIYOON',n:'セラミド アトローション',d:'全身使える低刺激保湿。オリヤンアワード受賞常連。',tags:['オリヤンアワード受賞'],oy:'🏆',p:'<b>₩18,000</b>'}]},
+reti:{intro:'<strong>レチノール</strong>はビタミンA誘導体。シワ・たるみ・毛穴に効果。低濃度で夜のみから。日中はSPF必須。',c1:'#F5E5D6',c2:'#D9B284',label:'Reti',
+kr:[{b:'Anua',n:'レチノール0.3 ナイアシン リニューイングセラム',d:'2025年オリヤン話題作。レチノール×ナイアシンアミド。',tags:['2025話題'],oy:'🔥2025注目',p:'<b>₩29,000</b>'},{b:'IOPE',n:'レチノール エキスパート 0.1%',d:'カプセル化で安定性高く皮むけしにくい。',tags:['安定型'],p:'<b>₩45,000</b>'},{b:'COSRX',n:'ザ レチノール 0.1 クリーム',d:'純粋レチノール0.1%。コスパ抜群。',tags:['コスパ◎'],p:'<b>₩25,000</b>'},{b:'Dr.Jart+',n:'タイムリバイバルレチノ アンプル',d:'レチノール×セラミド。ダウンタイム少。',tags:['ダウンタイム少'],p:'<b>₩52,000</b>'}]},
+acne:{intro:'<strong>ニキビ・毛穴</strong>にはBHA・AHA・ナイアシンアミドが定番。毛穴詰まりや角質を取り除き皮脂をコントロール。',c1:'#E6F1E8',c2:'#9CC8A4',label:'Acne',
+kr:[{b:'MEDIHEAL',n:'マデカソサイド ブレミッシュパッド',d:'2025年オリヤンアワード トナーパッド部門1位。',tags:['2025アワード1位'],oy:'🥇2025パッド1位',p:'<b>₩22,000</b>'},{b:'Anua',n:'ハートリーフ77% トナー',d:'ドクダミ77%の超鎮静トナー。赤み・ニキビ跡に。',tags:['OYランキング常連'],oy:'🏆',p:'<b>₩18,000</b>'},{b:'COSRX',n:'BHA パワーリキッド',d:'BHA4%。毛穴黒ずみ・皮脂詰まりの世界的定番。',tags:['BHA4%'],p:'<b>₩22,000</b>'},{b:'COSRX',n:'ピンプルパッチ',d:'貼って寝るだけの名作パッチ。オリヤン全期間通じてベストセラー。',tags:['殿堂入り'],oy:'🏆殿堂',p:'<b>₩3,000</b>'}]},
+uv:{intro:'<strong>日焼け止め</strong>は美肌ケアの最重要ステップ。SPF50・PA++++を毎朝。韓国コスメは白浮きしにくく使用感が◎。',c1:'#FFEDC1',c2:'#F0B83B',label:'UV',
+kr:[{b:'Round Lab',n:'1025 白樺 水分サンクリーム',d:'2025年オリヤンアワード 日焼け止め部門1位。白浮きなし。',tags:['2025アワード1位'],oy:'🥇2025UV1位',p:'<b>₩15,000</b>'},{b:'Beauty of Joseon',n:'リリーフサン 米＋B5',d:'OY全期間通じて上位。白浮きなし・肌荒れしにくい。',tags:['OY長期定番'],oy:'🏆',p:'<b>₩13,000</b>'},{b:'SKIN1004',n:'センテラ ウォーターフィット サンセラム',d:'2025〜2026年話題。サラサラ仕上がり。',tags:['2025〜2026話題'],oy:'🔥急上昇',p:'<b>₩18,000</b>'},{b:'d\'Alba',n:'ウォーターフル トーンアップサンクリーム',d:'トーンアップ×UV。ツヤ仕上がりで人気急上昇。',tags:['トーンアップ'],p:'<b>₩20,000</b>'}]}
+};
+
+// ===== 食べ物データ =====
+var FOOD=[
+{e:'🍖',name:'サムギョプサル',area:'弘大・梨泰院',desc:'韓国の定番焼肉。新鮮な豚バラをサンチュで巻いて食べる。一人でも入れるお店も増えた。',bg:'#FFF0E8',
+shops:[
+{n:'마포 돼지집（マポテジチプ）',area:'弘大',memo:'地元民に長年愛される老舗。炭火焼きが香ばしい。',u:'https://naver.me/xMDQBXY8'},
+{n:'연남동 삼겹살（ヨンナムドン サムギョプサル）',area:'延南洞',memo:'延南洞の人気店。줄서는 곳（行列必至）。',u:'https://map.naver.com/'}
+]},
+{e:'🍜',name:'ソルロンタン',area:'明洞・鍾路',desc:'牛骨を長時間煮込んだスープご飯。二日酔いに最高。明洞ソルロンタンが有名。',bg:'#FFF8E8',
+shops:[
+{n:'명동설렁탕（明洞ソルロンタン）',area:'明洞',memo:'1979年創業の超老舗。観光客にも地元民にも人気。',u:'https://naver.me/5NpAfFBR'},
+{n:'이문설농탕（イムン ソルノンタン）',area:'鍾路',memo:'1907年創業！ソウル最古の食堂のひとつ。',u:'https://naver.me/GxzIkJ3A'}
+]},
+{e:'🐟',name:'ノガリ（干し鱈）居酒屋',area:'江南・弘大',desc:'炙ったノガリとマッコリの組み合わせが最強。韓国の居酒屋文化を体験できる。',bg:'#E8F5FF',
+shops:[
+{n:'노가리 골목（ノガリ横丁）',area:'江南駅付近',memo:'江南の名物横丁。テーブルが路上に並ぶ雰囲気◎',u:'https://naver.me/FZaGjMzJ'},
+{n:'을지로 노가리（ウルチロ ノガリ）',area:'乙支路',memo:'乙支路の聖地的ノガリ横丁。レトロな雰囲気が好きな人に。',u:'https://naver.me/IYkRiMv7'}
+]},
+{e:'🍚',name:'ビビンバ',area:'全エリア',desc:'石焼きビビンバはソウル中どこでも。具材たっぷりで栄養満点。',bg:'#FFE8E8',
+shops:[
+{n:'전주중앙회관（チョンジュ チュンアン フェグァン）',area:'鍾路',memo:'全州式ビビンバの本格派。ナムルの種類が豊富。',u:'https://naver.me/G8JzQfMh'},
+{n:'고궁（コグン）',area:'明洞',memo:'観光客にも入りやすい。セットメニューが便利。',u:'https://naver.me/xHzmNKxD'}
+]},
+{e:'🥘',name:'部隊鍋（プデチゲ）',area:'議政府・明洞',desc:'ラーメン・ソーセージ・豆腐が入った濃厚な鍋。女子会に最高。',bg:'#FFE8F5',
+shops:[
+{n:'오뎅식당（オデン食堂）',area:'明洞',memo:'明洞で入りやすい部隊鍋専門店。日本語メニューあり。',u:'https://naver.me/xuY9AXFM'},
+{n:'의정부 부대찌개 거리（議政府 プデチゲ横丁）',area:'議政府',memo:'発祥の地・議政府の本場。ソウルから電車で30分。',u:'https://naver.me/FsLEQaLr'}
+]},
+{e:'🍣',name:'韓国海鮮（グァンジャン市場）',area:'鍾路・東大門',desc:'広蔵市場の生けがに・ユッケ・ビビンパが絶品。ソウル最大の市場。',bg:'#E8FFE8',
+shops:[
+{n:'광장시장（広蔵市場）',area:'鍾路',memo:'観光客必訪。路地屋台でマッコリとチヂミを。夜も営業。',u:'https://naver.me/GsSwO0nO'},
+{n:'노량진 수산시장（鷺梁津 水産市場）',area:'鷺梁津',memo:'お刺身を安く食べるなら鷺梁津。選んで持ち込み調理も◎',u:'https://naver.me/5q87qeNf'}
+]}
+];
+var CAFE=[
+{e:'☕',name:'韓屋カフェ',area:'北村韓屋村・益善洞',desc:'古い韓屋をリノベしたおしゃれカフェが集結。伝統と現代が融合した空間でひと息。',bg:'#FFF0E8',
+shops:[
+{n:'익선동 카페 거리（益善洞カフェ通り）',area:'益善洞（鍾路）',memo:'ソウルで一番おしゃれな韓屋カフェ集積地。SNS映え◎',u:'https://naver.me/xtfm5Hvu'},
+{n:'북촌손만두（北村ソンマンドゥ）',area:'北村',memo:'景福宮近く。散歩しながら寄れる韓屋カフェ。',u:'https://naver.me/5JpQqzrF'}
+]},
+{e:'🍵',name:'ダルゴナ・ユニークカフェ',area:'仁寺洞・弘大',desc:'韓国発ダルゴナコーヒーから話題のシリアルカフェまで。ユニークな体験系カフェが豊富。',bg:'#F0E8FF',
+shops:[
+{n:'인사동 티하우스（仁寺洞ティーハウス）',area:'仁寺洞',memo:'ダルゴナコーヒーが飲めるほか、伝統茶も豊富。',u:'https://naver.me/FHt7c1vb'},
+{n:'카페 봄봄（カフェ ボンボン）',area:'弘大',memo:'韓国式の飾りたっぷりラテが人気。インスタ映え系。',u:'https://naver.me/GP8n9AvK'}
+]},
+{e:'🧁',name:'韓国スイーツカフェ',area:'延南洞・成水洞',desc:'クロフル・チーズタルト・ソフトクリーム。韓国発スイーツトレンドが生まれる街。',bg:'#E8FFE8',
+shops:[
+{n:'런던 베이글 뮤지엄（ロンドン ベーグル ミュージアム）',area:'安国・弘大',memo:'行列必至の人気ベーグル店。朝イチが狙い目。',u:'https://naver.me/xBbvgDBm'},
+{n:'어니언（ONION）',area:'成水洞・安国',memo:'倉庫をリノベしたカフェ。シンプルなパンと内装が韓国的クールさ。',u:'https://naver.me/GAy5rGsJ'}
+]},
+{e:'🍰',name:'トレンドカフェ（成水・延南）',area:'成水洞・延南洞',desc:'ソウルの若者が集まる今一番熱いエリア。次々と新カフェがオープン。',bg:'#E8F5FF',
+shops:[
+{n:'대림창고（テリム倉庫）',area:'成水洞',memo:'廃工場リノベのアートカフェ。成水洞の象徴的存在。',u:'https://naver.me/xhj2IAvD'},
+{n:'연남방앗간（延南ホンアッカン）',area:'延南洞',memo:'昔ながらのお餅屋をカフェにリノベ。ヨモギラテが名物。',u:'https://naver.me/GnZhJb4k'}
+]}
+];
+
+// ===== イベントデータ =====
+var EVENTS=[
+{e:'🏯',name:'景福宮 韓服体験',area:'鍾路区',desc:'韓国の宮殿で韓服レンタル。宮内は韓服着用で入場料無料になる。',bg:'#FFE8F5'},
+{e:'💆‍♀️',name:'汗蒸幕（チムジルバン）',area:'全エリア',desc:'韓国式サウナ。ドラゴンヒルスパが外国人に人気。24時間営業。',bg:'#E8F5FF'},
+{e:'🎵',name:'韓国ミュージカル観劇',area:'大学路（テハンノ）',desc:'日本より安くてクオリティが高い。学生多く活気あり。英語字幕なしだが雰囲気で楽しめる。',bg:'#F5FFE8'},
+{e:'🎨',name:'弘大アートマーケット',area:'弘大',desc:'週末限定のインディーズクリエイターのマーケット。韓国女子のハンドメイド雑貨が安い。',bg:'#FFF0E8'},
+{e:'🌊',name:'漢江ピクニック',area:'漢江公園',desc:'チキンとビールを持って漢江へ。韓国の夏の恒例行事。観光客にも大人気。',bg:'#E8F0FF'},
+{e:'🌿',name:'北漢山ハイキング',area:'ソウル北部',desc:'市内から30分。韓国女子の週末のお決まり。初心者コースもあり。',bg:'#E8FFE8'}
+];
+var SEASONS=[
+{e:'🌸',name:'ヨイド桜まつり',area:'ヨイド',desc:'4月初旬。漢江沿いに桜が咲き乱れる。週末は激混みなので平日がおすすめ。',bg:'#FFE8F5'},
+{e:'🎆',name:'ソウルランタンフェスティバル',area:'清渓川',desc:'11月。水面に浮かぶランタンが幻想的。夜に行くと最高。',bg:'#FFF0E8'},
+{e:'❄️',name:'スキーリゾート',area:'京畿道・江原道',desc:'ソウルから1〜2時間でスキー場。平昌オリンピック施設も楽しめる。',bg:'#E8F5FF'},
+{e:'🎑',name:'チュソク（秋夕）前後',area:'全国',desc:'韓国版お盆の時期。伝統市場や民俗村でイベント多数。ただし店の休業多いので注意。',bg:'#F5FFE8'}
+];
+
+// ===== ショッピングデータ =====
+var SHOPS=[
+{e:'🏬',name:'明洞ショッピング',area:'明洞',desc:'コスメの聖地。オリーブヤング・イニスフリー・エチュードが密集。免税価格で買えるものも。',bg:'#FFE8F5'},
+{e:'🧥',name:'東大門ファッション',area:'東大門',desc:'夜中まで営業の問屋街。韓国トレンドのファストファッションが激安。深夜がピーク。',bg:'#E8F5FF'},
+{e:'🛍',name:'弘大・延南洞',area:'弘大エリア',desc:'インディーズブランド・ヴィンテージ・カフェが集まる若者の街。掘り出し物が多い。',bg:'#F5FFE8'},
+{e:'💍',name:'清潭洞・ガロスギル',area:'江南',desc:'韓国のハイブランド街。韓国コスメのフラッグシップもここに集中。',bg:'#FFF0E8'},
+{e:'👜',name:'南大門市場',area:'南大門',desc:'衣類・食材・雑貨が揃う巨大市場。韓国のおばちゃんが来る現地感満点の市場。',bg:'#FFE8E8'},
+{e:'🎮',name:'ロッテワールドモール',area:'蚕室（江南）',desc:'テーマパーク隣接の大型モール。アパレル・コスメ・スーパーが一気に揃う。',bg:'#E8F0FF'}
+];
+var BUYS=[
+{e:'🧴',name:'オリーブヤング限定コスメ',area:'明洞・全国',desc:'日本未入荷の限定品が狙い目。エコバッグも韓国女子の定番おみやげ。',bg:'#FFE8F5'},
+{e:'🍫',name:'ハニーバターアーモンド',area:'コンビニ・空港',desc:'知る人ぞ知る定番おみやげ。コンビニで大量買いが正解。',bg:'#FFF0E8'},
+{e:'🧦',name:'韓国ソックス',area:'弘大・明洞',desc:'かわいい柄が揃う靴下屋が多い。まとめ買いしても後悔しない価格。',bg:'#E8F5FF'},
+{e:'💊',name:'韓国サプリ・健康食品',area:'薬局・Hmall',desc:'コラーゲン・プラセンタ・美白サプリが日本の半額以下。ドンウィ製薬が有名。',bg:'#F5FFE8'}
+];
+
+// ===== 施術詳細データ =====
+var TREAT_DETAIL={
+peel:{pain:1,effect:3,desc:'肌に薬剤（グリコール酸・サリチル酸など）を塗布し、古い角質や毛穴の詰まりを溶かして除去する施術。肌のターンオーバーを促進し、ニキビの原因となる角栓を取り除きます。施術後は一時的に赤みが出ることがありますが、ダウンタイムはほぼなし。',points:['🕐 施術時間：30〜60分','✨ 効果：角質除去・ニキビ予防・毛穴ケア','🔁 推奨頻度：月1回ペース','⚠️ 注意：術後1週間は紫外線対策を徹底']},
+led:{pain:0,effect:2,desc:'青色LED（波長415nm付近）が肌のアクネ菌に直接作用し、菌を減少させながら炎症を鎮静します。針を使わず完全無痛。肌が弱い方や妊娠中の方でも受けやすい施術です。',points:['🕐 施術時間：20〜30分','✨ 効果：アクネ菌殺菌・炎症鎮静','🔁 推奨頻度：週1〜2回×5回以上','⚠️ 注意：光過敏症の方は要相談']},
+dpen:{pain:2,effect:4,desc:'極細の針が並んだヘッドで皮膚に微細な穴を開け、成長因子・ヒアルロン酸・PDRNなどの有効成分を真皮層まで届ける施術。コラーゲン生成を促し、ニキビ跡・毛穴・乾燥にも効果的。',points:['🕐 施術時間：60〜90分（麻酔含む）','✨ 効果：成分浸透・コラーゲン生成・ニキビ跡改善','🔁 推奨頻度：3〜5回（1ヶ月おき）','⚠️ 注意：施術後2〜3日は赤み・乾燥あり']},
+agnes:{pain:4,effect:5,desc:'特殊な針を皮脂腺に直接刺し、RFエネルギーで皮脂腺を選択的に破壊する施術。皮脂分泌を根本から抑えるため、繰り返すニキビや難治性ニキビへの最終手段として韓国で普及。',points:['🕐 施術時間：60〜120分','✨ 効果：皮脂腺破壊・再発防止・重症ニキビ','🔁 推奨頻度：2〜3回（3ヶ月おき）','⚠️ 注意：術後1週間程度の腫れ・ダウンタイムあり']},
+genesis:{pain:1,effect:3,desc:'レーザービームとカーボン（炭素）クリームを組み合わせた韓国発の施術。カーボンが毛穴に入り込み、レーザー照射で爆発的に除去。皮脂・菌・毛穴詰まりを同時にケア。',points:['🕐 施術時間：40〜60分','✨ 効果：毛穴・皮脂・菌の同時ケア＋美白','🔁 推奨頻度：月1〜2回','⚠️ 注意：ダウンタイムほぼなし。日焼け注意']},
+photo:{pain:1,effect:4,desc:'IPL（光治療）でシミ・赤み・くすみ・毛穴を同時にアプローチ。広範囲に光を照射するため、散らばったシミや全体的なくすみに適しています。',points:['🕐 施術時間：30〜45分','✨ 効果：シミ・赤み・くすみ・毛穴の同時改善','🔁 推奨頻度：月1回×5回程度','⚠️ 注意：術後は一時的にシミが濃くなる（かさぶた化）']},
+pico:{pain:2,effect:4,desc:'ピコ秒レーザーで色素を極微細に粉砕する施術。従来のQスイッチレーザーより短い照射時間で熱ダメージが少なく、濃いシミや頑固なシミにも効果的。',points:['🕐 施術時間：20〜40分','✨ 効果：シミのピンポイント除去・トーンアップ','🔁 推奨頻度：1〜3ヶ月おき','⚠️ 注意：照射部位のかさぶた（5〜7日）']},
+toning:{pain:1,effect:3,desc:'低出力のレーザーを肌全体に繰り返し照射し、メラニンを少しずつ分解する施術。特に肝斑（ホルモン性シミ）に適しています。',points:['🕐 施術時間：20〜30分','✨ 効果：肝斑・くすみ・全体トーン底上げ','🔁 推奨頻度：週1回×10回推奨','⚠️ 注意：単発では効果薄。継続が鍵']},
+gluta:{pain:1,effect:3,desc:'美白・抗酸化作用のあるグルタチオンを点滴で直接血中に入れる施術。飲む美白サプリより吸収率が高く、全身の酸化ストレスを軽減します。',points:['🕐 施術時間：30〜60分','✨ 効果：美白・抗酸化・くすみ改善','🔁 推奨頻度：週1回〜月1回','⚠️ 注意：効果維持には定期的な継続が必要']},
+bright:{pain:1,effect:3,desc:'韓国独自のIPL機器（ルメッカ・シナジー等）を使ったブライトニング光治療。日本に未導入の機器が多く、トーンアップ効果や照射精度で韓国が先行。',points:['🕐 施術時間：30〜45分','✨ 効果：全体的なトーンアップ・くすみ改善','🔁 推奨頻度：月1回','⚠️ 注意：施術後は紫外線対策必須']},
+dpen4:{pain:2,effect:4,desc:'最新のダーマペン4を使用し、肌の真皮層に微細な穴を開けてコラーゲン生成を促す施術。毛穴の開きやニキビ跡のクレーター改善に特に効果的。',points:['🕐 施術時間：60〜90分','✨ 効果：毛穴縮小・ニキビ跡・クレーター改善','🔁 推奨頻度：3〜5回（1ヶ月おき）','⚠️ 注意：術後2〜3日赤み・ダウンタイムあり']},
+poten:{pain:3,effect:5,desc:'RFエネルギーとマイクロニードルを組み合わせたポテンツァ（Potenza）。針が真皮層に届いた状態でRFを照射するため、熱エネルギーが確実に届きます。毛穴・ニキビ跡に韓国で圧倒的な支持。',points:['🕐 施術時間：60〜90分（麻酔含む）','✨ 効果：毛穴・ニキビ跡・皮脂・たるみ改善','🔁 推奨頻度：3〜5回（1〜2ヶ月おき）','⚠️ 注意：術後3〜5日の赤みと乾燥']},
+hydra:{pain:0,effect:3,desc:'特殊な吸引ノズルで毛穴の皮脂・角栓を吸い取りながら、美容成分を同時に導入するウォータージェット施術。痛みがなく即日効果が実感しやすい。',points:['🕐 施術時間：40〜60分','✨ 効果：毛穴の皮脂除去・保湿・即日ツヤ','🔁 推奨頻度：月1〜2回','⚠️ 注意：ダウンタイムなし。直後は肌が敏感']},
+skinbo:{pain:2,effect:3,desc:'ボトックスを希釈して真皮表層に多点注射する施術。筋肉を動かさず皮脂腺のみに作用するため、テカリ・毛穴・汗を抑えながら自然な表情を保てます。',points:['🕐 施術時間：30〜45分','✨ 効果：皮脂・毛穴・テカリ抑制','🔁 推奨頻度：4〜6ヶ月おき','⚠️ 注意：日本での取り扱いは限定的']},
+sylfirm:{pain:2,effect:4,desc:'パルス波RFをニードルから照射するシルファームX（Sylfirm X）。毛穴・ニキビ跡だけでなく赤ら顔（ロゼーシア）の改善にも実績があります。',points:['🕐 施術時間：40〜60分（麻酔含む）','✨ 効果：毛穴・ニキビ跡・赤ら顔・色素沈着','🔁 推奨頻度：3〜5回（1ヶ月おき）','⚠️ 注意：術後2〜3日の赤みと乾燥']},
+hifu:{pain:3,effect:5,desc:'超音波エネルギーをSMAS筋膜層まで届かせてたるみを引き上げる施術。最新型ソフウェーブは痛みが従来比で大幅に軽減され、初回でも受けやすい次世代HIFUです。',points:['🕐 施術時間：60〜90分','✨ 効果：たるみ引き上げ・フェイスライン引き締め','🔁 推奨頻度：年1〜2回','⚠️ 注意：効果は3ヶ月かけて徐々に出る']},
+botox:{pain:1,effect:4,desc:'ボツリヌストキシンを筋肉に注射し、表情ジワを一時的に伸ばす施術。韓国は日本の1/3〜1/2程度の価格で受けられます。',points:['🕐 施術時間：15〜30分','✨ 効果：表情ジワの改善・予防','🔁 推奨頻度：4〜6ヶ月おき','⚠️ 注意：効果は永続しない']},
+filler:{pain:2,effect:4,desc:'ヒアルロン酸を深いシワやほうれい線などに注入し、ボリュームを補充する施術。経験豊富な医師の技術力が仕上がりを左右します。',points:['🕐 施術時間：30〜60分','✨ 効果：深いシワ・ボリューム補充','🔁 効果持続：6ヶ月〜1年半','⚠️ 注意：注入部位によっては内出血リスクあり']},
+exo:{pain:2,effect:5,desc:'幹細胞から抽出した微小な小胞（エクソソーム）を注入する最先端再生療法。成長因子・mRNAなどを含み、肌の再生力を根本から高めます。',points:['🕐 施術時間：30〜60分','✨ 効果：肌再生・シワ・たるみ・くすみの根本改善','🔁 推奨頻度：月1回×3回〜','⚠️ 注意：信頼できるクリニックで受けること']},
+rituo:{pain:2,effect:5,desc:'PCL（ポリカプロラクトン）とヒアルロン酸の複合体リトゥオ。注入直後からボリューム感が出つつ、PCLが最長2年かけてコラーゲン生成を促します。',points:['🕐 施術時間：30〜60分','✨ 効果：ボリューム回復＋長期コラーゲン生成','🔁 効果持続：1.5〜2年','⚠️ 注意：注入技術の差が出やすい。医師選びが重要']},
+titanium:{pain:1,effect:4,desc:'850nm帯チタニウム超音波でSMAS筋膜を加熱・収縮させるリフティング施術。ウルセラより痛みが少なく腫れもほぼなし。2025年の韓国で最もトレンドのリフティング機器。',points:['🕐 施術時間：30〜60分','✨ 効果：たるみ引き上げ・フェイスライン・肌質改善','🔁 推奨頻度：年1〜2回','⚠️ 注意：効果は1〜3ヶ月かけて出る']},
+aqua:{pain:2,effect:4,desc:'超極細の多数の針が付いたデバイスで、ヒアルロン酸やPDRNなどを真皮に直接注入する施術。翌日には透明感・ハリ感が実感でき、乾燥・毛穴・小ジワに同時アプローチ。',points:['🕐 施術時間：30〜60分（麻酔含む）','✨ 効果：即日ツヤ・ハリ・保湿・毛穴改善','🔁 推奨頻度：月1回〜2ヶ月に1回','⚠️ 注意：内出血が出ることがある']},
+reju:{pain:2,effect:4,desc:'サーモン由来のDNA成分PDRNを注入するリジュラン。肌細胞の再生・修復を促し、ハリ・潤い・毛穴・ニキビ跡を総合的に改善。韓国発で世界的に広まった「肌質改善注射」の代表格。',points:['🕐 施術時間：30〜45分','✨ 効果：肌再生・乾燥・ハリ・毛穴・ニキビ跡','🔁 推奨頻度：月1回×3〜4回','⚠️ 注意：魚アレルギーの方は要事前確認']},
+bambi:{pain:1,effect:3,desc:'アミノ酸・ビタミン・コラーゲン前駆体などを配合した多成分注射「バンビショット（子鹿注射）」。ほんのりピンクがかった健康的な肌トーンを与えるとして韓国で人気。',points:['🕐 施術時間：20〜40分','✨ 効果：血色感・透明感・肌トーン改善','🔁 推奨頻度：月1〜2回','⚠️ 注意：成分は製品ごとに異なる']},
+exoskin:{pain:2,effect:5,desc:'幹細胞が分泌するエクソソームを真皮に直接注入するスキンブースター。リジュランの「次世代版」として注目。透明感・弾力・水分量の総合改善に加え、ダウンタイムも比較的短い。',points:['🕐 施術時間：30〜60分','✨ 効果：肌再生・透明感・弾力・乾燥の根本改善','🔁 推奨頻度：月1回×3回〜','⚠️ 注意：2025年最新技術。クリニックごとに品質差あり']}
+};
+
+// ===== STATE =====
+var currentSection='skin';
+var currentSkinTab='treat';
+var currentConcern='acne';
+var currentCos='vitc';
+var currentArea='md';
+var currentTier='all';
+
+// ===== ナビ =====
+function showSection(id, el){
+  document.querySelectorAll('.section-block').forEach(function(s){s.classList.remove('visible')});
+  document.querySelectorAll('.nav-card').forEach(function(n){n.classList.remove('active')});
+  document.getElementById('sec-'+id).classList.add('visible');
+  el.classList.add('active');
+  currentSection=id;
+  if(id==='skin') renderCurrentSkin();
+  if(id==='food') renderFood();
+  if(id==='event') renderEvent();
+  if(id==='shopping') renderShopping();
+}
+
+function renderCurrentSkin(){
+  if(currentSkinTab==='treat') renderConcern();
+  if(currentSkinTab==='clinic') renderClinics();
+  if(currentSkinTab==='cosme') renderCos();
+}
+
+function setSkinTab(tab, el){
+  document.querySelectorAll('.skin-content').forEach(function(s){s.style.display='none'});
+  document.getElementById('skin-'+tab).style.display='block';
+  document.querySelectorAll('#sec-skin > .skin-tabs .skin-tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  currentSkinTab=tab;
+  if(tab==='treat') renderConcern();
+  if(tab==='clinic') renderClinics();
+  if(tab==='cosme') renderCos();
+}
+
+// ===== 施術 =====
+function setConcern(c, el){
+  currentConcern=c;
+  document.querySelectorAll('#skin-treat .skin-tab').forEach(function(t){t.classList.remove('active')});
+  if(el) el.classList.add('active');
+  renderConcern();
+}
+
+function renderConcern(){
+  var d=CONCERNS[currentConcern];
+  var html='<div class="cos-intro">'+d.intro+'</div><div class="treat-grid">';
+  d.items.forEach(function(it){
+    var badge=it.krOnly?'<span class="badge-kr">'+it.badge+'</span>':(it.badge?'<span class="badge-r">'+it.badge+'</span>':'');
+    html+='<div class="treat-card" onclick="openDetail(\''+currentConcern+'\',\''+it.id+'\')">'+badge+'<div class="tc-icon"><i class="ti '+it.ic+'"></i></div><h4>'+it.n+'</h4><p>'+it.d+'</p><div class="tc-price">🇰🇷 '+it.pk+'</div><span class="tc-hint">詳しく →</span></div>';
+  });
+  html+='</div>';
+  document.getElementById('concern-body').innerHTML=html;
+}
+
+// ===== クリニック =====
+function setArea(a, el){
+  currentArea=a;
+  document.querySelectorAll('.area-tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  renderClinics();
+}
+function setTier(t, el){
+  currentTier=t;
+  document.querySelectorAll('.cf-tag').forEach(function(x){x.classList.remove('active')});
+  el.classList.add('active');
+  renderClinics();
+}
+function renderClinics(){
+  var pool=CLINICS[currentArea].slice();
+  if(currentTier!=='all') pool=pool.filter(function(c){return c.t===currentTier;});
+  var html='';
+  pool.forEach(function(c){
+    var tl=TIERLBL[c.t];
+    var recBadge=c.rec?'<div class="rec-badge">⭐ おすすめ</div>':'';
+    var hpBtn=c.u?'<a class="clinic-hp-btn" href="'+c.u+'" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> '+c.ut+'</a>':'';
+    html+='<div class="clinic-card'+(c.rec?' rec':'')+'">'+recBadge+'<span class="clinic-tier '+tl[0]+'">'+tl[1]+'</span><h4>'+c.n+'</h4><div class="c-loc"><i class="ti ti-map-pin"></i>'+c.loc+'</div><p class="c-desc">'+c.d+'</p><div class="c-meta"><span class="c-pill">'+c.jp+'</span>'+c.tags.map(function(t){return '<span class="c-pill">'+t+'</span>';}).join('')+'</div>'+hpBtn+'</div>';
+  });
+  document.getElementById('clinic-results').innerHTML=html;
+}
+
+// ===== コスメ =====
+function setCos(c, el){
+  currentCos=c;
+  document.querySelectorAll('#skin-cosme .skin-tab').forEach(function(t){t.classList.remove('active')});
+  if(el) el.classList.add('active');
+  renderCos();
+}
+function renderCos(){
+  var d=COS[currentCos];
+  var html='<div class="oy-note"><i class="ti ti-trophy"></i><div><strong>🏆 = オリーブヤングアワード受賞　🥇= カテゴリ1位　🔥= 急上昇注目作</strong>（2025年オリーブヤングアワード基準）　<a href="https://www.oliveyoung.co.kr" target="_blank" rel="noopener" style="color:var(--pink);font-weight:600;font-size:10px;">公式サイト ↗</a></div></div>';
+  html+='<div class="cos-intro">'+d.intro+'</div><div class="cos-grid">';
+  d.kr.forEach(function(it,i){
+    var price=addYenConv(it.p);
+    var oyBadge=it.oy?'<div class="oy-badge">'+it.oy+'</div>':'';
+    html+='<div class="cos-card">'+oyBadge+'<div class="cos-card-img" style="background:linear-gradient(135deg,'+d.c1+','+d.c2+')">'+bottleSVG(d.c1,d.c2,d.label)+'</div><div class="cos-card-body"><p class="cos-brand">'+it.b+'</p><h4>'+it.n+'</h4><p>'+it.d+'</p><div class="cos-tags">'+it.tags.map(function(t){return '<span class="cos-tag">'+t+'</span>';}).join('')+'</div><p class="cos-price">'+price+'</p></div></div>';
+  });
+  html+='</div>';
+  document.getElementById('cos-content').innerHTML=html;
+}
+
+// ===== 施術詳細 =====
+function openDetail(concern, id){
+  var it=CONCERNS[concern].items.filter(function(x){return x.id===id;})[0];
+  if(!it) return;
+  var det=TREAT_DETAIL[id]||{};
+  var badgeHtml=it.krOnly?'<span class="badge-kr">'+it.badge+'</span>':(it.badge?'<span class="badge-r">'+it.badge+'</span>':'');
+  function stars(n){var s='';for(var i=1;i<=5;i++)s+='<span class="'+(i<=n?'star-fill':'star-empty')+'">★</span>';return s;}
+  var painLabels=['なし','ほぼなし','やや痛い','痛い','かなり痛い','激痛'];
+  var effectLabels=['','やや期待','効果あり','しっかり効く','かなり効く','最高レベル'];
+  var pointsHtml='';
+  if(det.points) det.points.forEach(function(p){pointsHtml+='<div class="detail-point"><span>'+p+'</span></div>';});
+  var filteredClinics=it.cl.filter(function(c){return c.c==='kr';});
+  var clinicsHtml='';
+  if(filteredClinics.length===0){clinicsHtml='<p style="font-size:13px;color:var(--muted)">現在この施術のクリニック情報はありません。</p>';}
+  else{filteredClinics.forEach(function(c){var btn=c.u?'<a class="detail-clinic-btn" href="'+c.u+'" target="_blank" rel="noopener">公式HP ↗</a>':'<span style="font-size:11px;color:var(--muted)">公式LINE等で予約</span>';clinicsHtml+='<div class="detail-clinic-card"><div class="detail-clinic-info"><h4>'+c.n+' <span class="pop-flag flag-kr">🇰🇷 韓国</span></h4><p>'+c.why+'</p><p class="dc-loc"><i class="ti ti-map-pin"></i> '+c.loc+'</p></div>'+btn+'</div>';});}
+  var html='<button class="detail-back" onclick="closeDetail()"><i class="ti ti-arrow-left"></i> 戻る</button>';
+  html+='<div class="detail-hero"><div class="detail-hero-icon"><i class="ti '+it.ic+'"></i></div><div class="detail-hero-badges">'+badgeHtml+'</div><h1>'+it.n+'</h1><div class="detail-price-row"><div class="detail-price-box"><div class="pb-label">🇰🇷 韓国相場</div><div class="pb-val">'+(it.pk||'—')+'</div></div></div></div>';
+  if(det.pain!==undefined&&det.effect!==undefined){html+='<div class="detail-stars-row"><div class="detail-star-box"><div class="sb-label">😣 痛みレベル</div><div class="sb-stars">'+stars(det.pain)+'</div><div style="font-size:11px;color:var(--muted);margin-top:4px">'+painLabels[det.pain]+'</div></div><div class="detail-star-box"><div class="sb-label">✨ 効果レベル</div><div class="sb-stars">'+stars(det.effect)+'</div><div style="font-size:11px;color:var(--muted);margin-top:4px">'+effectLabels[det.effect]+'</div></div></div>';}
+  html+='<div class="detail-section"><p class="detail-section-title">施術について</p><div class="detail-desc-card">'+(det.desc||it.d)+'</div></div>';
+  if(pointsHtml) html+='<div class="detail-section"><p class="detail-section-title">施術データ</p><div class="detail-points">'+pointsHtml+'</div></div>';
+  html+='<div class="detail-section"><p class="detail-section-title">この施術が得意なクリニック</p>'+clinicsHtml+'</div>';
+  document.getElementById('detail-sheet-inner').innerHTML=html;
+  var overlay=document.getElementById('detail-overlay');
+  overlay.classList.add('open');
+  overlay.scrollTop=0;
+  document.body.style.overflow='hidden';
+}
+function closeDetail(){document.getElementById('detail-overlay').classList.remove('open');document.body.style.overflow='';}
+
+// ===== グリッドレンダラー =====
+function renderContentGrid(data, containerId){
+  var html='';
+  data.forEach(function(item){
+    html+='<div class="content-card"><div class="content-card-img" style="background:'+item.bg+'">'+item.e+'</div><div class="content-card-body"><h4>'+item.name+'</h4><p>'+item.desc+'</p><span class="c-area-tag">📍 '+item.area+'</span></div></div>';
+  });
+  document.getElementById(containerId).innerHTML=html;
+}
+function renderFood(){renderFoodGrid(FOOD,'food-grid');renderFoodGrid(CAFE,'cafe-grid');}
+function renderFoodGrid(data, containerId){
+  var html='';
+  data.forEach(function(item,idx){
+    var id=containerId+'-'+idx;
+    html+='<div class="food-card" onclick="toggleFood(\''+id+'\')" style="background:'+item.bg+'">'
+      +'<div class="food-card-top"><span class="food-emoji">'+item.e+'</span>'
+      +'<div class="food-card-text"><h4>'+item.name+'</h4>'
+      +'<span class="food-area">📍 '+item.area+'</span>'
+      +'<p>'+item.desc+'</p></div>'
+      +'<span class="food-arrow" id="arr-'+id+'"><i class="ti ti-chevron-down"></i></span>'
+      +'</div>'
+      +'<div class="food-shops" id="'+id+'" style="display:none">';
+    item.shops.forEach(function(s){
+      html+='<div class="food-shop-item">'
+        +'<div class="food-shop-info"><span class="food-shop-name">'+s.n+'</span>'
+        +'<span class="food-shop-area">📍 '+s.area+'</span>'
+        +'<span class="food-shop-memo">'+s.memo+'</span></div>'
+        +(s.u?'<a class="food-shop-btn" href="'+s.u+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">地図・詳細 ↗</a>':'')
+        +'</div>';
+    });
+    html+='</div></div>';
+  });
+  document.getElementById(containerId).innerHTML=html;
+}
+function toggleFood(id){
+  var el=document.getElementById(id);
+  var arr=document.getElementById('arr-'+id);
+  var open=el.style.display==='none';
+  el.style.display=open?'block':'none';
+  arr.style.transform=open?'rotate(180deg)':'rotate(0deg)';
+}
+function renderEvent(){renderContentGrid(EVENTS,'event-grid');renderContentGrid(SEASONS,'season-grid');}
+function renderShopping(){renderContentGrid(SHOPS,'shop-grid');renderContentGrid(BUYS,'buy-grid');}
+
+// ===== 初期化 =====
+renderConcern();
+</script>
+</body>
+</html>
